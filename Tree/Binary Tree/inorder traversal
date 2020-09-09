@@ -1,0 +1,69 @@
+
+    #include <bits/stdc++.h>
+using namespace std;
+
+class Node
+{
+    public:
+        int data;
+        Node *left;
+        Node *right;
+        Node(int d)
+        {
+            data=d;
+            left=NULL;
+            right=NULL;
+        }
+};
+
+class Solution
+{
+    public:
+        Node *insert(Node *root,int data)
+        {
+            if(root==NULL)
+            {
+                return new Node(data);
+            }
+            else
+            {
+                Node *current;
+                if(data<=root->data)
+                {
+                    current=insert(root->left,data);
+                    root->left=current;
+                }
+                else
+                {
+                    current=insert(root->right,data);
+                    root->right=current;
+                }
+                return root;
+            }
+        }
+        
+        void preorder(Node *root)
+        {
+            if(root!=NULL)
+            {
+                preorder(root->left);
+                cout<<root->data<<" ";
+                preorder(root->right);
+            }
+        }
+};
+
+int main()
+{
+    Solution myTree;
+    
+    Node *root=NULL;
+    int t,data;
+    cin>>t;//no of nodes
+    while(t--)
+    {
+        cin>>data;
+        root=myTree.insert(root,data);
+    }
+    myTree.preorder(root);
+}
