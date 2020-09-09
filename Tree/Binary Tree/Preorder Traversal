@@ -1,46 +1,68 @@
 #include <bits/stdc++.h>
-
 using namespace std;
 
-class Node {
+class Node
+{
     public:
         int data;
         Node *left;
         Node *right;
-        Node(int d) {
-            data = d;
-            left = NULL;
-            right = NULL;
+        Node(int d)
+        {
+            data=d;
+            left=NULL;
+            right=NULL;
         }
 };
 
-class Solution {
+class Solution
+{
     public:
-  		Node* insert(Node* root, int data) {
-            if(root == NULL) {
-                return new Node(data);
-            } else {
-                Node* cur;
-                if(data <= root->data) {
-                    cur = insert(root->left, data);
-                    root->left = cur;
-                } else {
-                    cur = insert(root->right, data);
-                    root->right = cur;
-               }
-
-               return root;
-           }
-        }
-
-    void preOrder(Node *root) {
-      
-        if(root!=NULL)
+        Node *insert(Node *root,int data)
         {
-            cout<<root->data<<" ";
-            preOrder(root->left);
-            preOrder(root->right);
+            if(root==NULL)
+            {
+                return new Node(data);
+            }
+            else
+            {
+                Node *current;
+                if(data<=root->data)
+                {
+                    current=insert(root->left,data);
+                    root->left=current;
+                }
+                else
+                {
+                    current=insert(root->right,data);
+                    root->right=current;
+                }
+                return root;
+            }
         }
-    }
+        
+        void preorder(Node *root)
+        {
+            if(root!=NULL)
+            {
+                cout<<root->data<<" ";
+                preorder(root->left);
+                preorder(root->right);
+            }
+        }
+};
 
-}; //End of Solution
+int main()
+{
+    Solution myTree;
+    
+    Node *root=NULL;
+    int t,data;
+    cin>>t;//no of nodes
+    while(t--)
+    {
+        cin>>data;
+        root=myTree.insert(root,data);
+    }
+    myTree.preorder(root);
+}
