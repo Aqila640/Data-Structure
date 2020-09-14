@@ -47,28 +47,20 @@ class Node {
 };
 
 */
+void topView(Node * root) {
+        queue<pair<int,Node*>> q; q.push(make_pair(0,root));
+        map<int,Node*> ans;
+        for(auto i=q.front();!q.empty();q.pop(),i=q.front()){
+            if(!i.second) continue;
+            ans.insert(i);
+            q.push(make_pair(i.first+1,i.second->right));
+            q.push(make_pair(i.first-1,i.second->left));
+        }
+        for(auto i:ans) cout<<i.second->data<<" ";
+    }
 
-    Node * new_node;
-int flag=0;
-void functions(Node * root){
-    if(root == NULL)  return;
-    cout << root->data <<" ";
-    functions(root->right);
-}
-void topView(Node * root)
-{   
-    if(flag==0){
-        new_node = root;
-        flag++;
-    }
-    if(root == NULL)  return;
-    topView(root->left);
-    cout << root->data << " ";
-    if(root == new_node){
-        functions(root->right);
-        return ;
-    }
-}
+
+ 
 
 }; //End of Solution
 
